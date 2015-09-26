@@ -3,6 +3,9 @@ wdocker
 
 Define docker commands in your Dockerfile
 
+.. image:: https://travis-ci.org/babab/wdocker.svg?branch=master
+   :target: https://travis-ci.org/babab/wdocker
+
 wdocker is a simple little solution to manage your docker image(s)
 and container(s) without having to remember and type long lists of
 optional arguments to docker commands. There are far more sophisticated
