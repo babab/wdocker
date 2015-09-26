@@ -36,9 +36,15 @@ Dependencies
 Installing
 ----------
 
+Installing (from the Python Package Index):
+
+.. code-block:: shell
+
+   sudo pip install wdocker
+
 Installing (development version):
 
-.. code-block:: console
+.. code-block:: shell
 
    git clone git://github.com/babab/wdocker.git
    cd wdocker
@@ -47,9 +53,9 @@ Installing (development version):
 
 Un-installing:
 
-.. code-block:: console
+.. code-block:: shell
 
-   $ pip uninstall wdocker
+   pip uninstall wdocker
 
 
 Writing commands in your Dockerfile
