@@ -15,7 +15,10 @@ setup(
     download_url='https://pypi.python.org/pypi/wdocker',
     py_modules=['wdocker'],
     license='ISC',
-    long_description=open('README.rst').read().replace(_description, ''),
+    long_description='{}\n\n{}'.format(
+        open('README.rst').read().replace(_description, ''),
+        open('CHANGELOG.rst').read()
+    ),
     platforms='any',
     scripts=['script/wdocker'],
     classifiers=[
