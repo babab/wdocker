@@ -28,10 +28,10 @@ make:
 install: install-wheel
 
 install-wheel: dist
-	pip install --upgrade dist/wdocker-0.1.0-py2.py3-none-any.whl
+	pip install --upgrade dist/wdocker-0.2.0-py2.py3-none-any.whl
 	make clean
 install-src: dist
-	pip install --upgrade dist/wdocker-0.1.0.tar.gz
+	pip install --upgrade dist/wdocker-0.2.0.tar.gz
 	make clean
 install-dev: cleanup
 	pip install --upgrade -e .

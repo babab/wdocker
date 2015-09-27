@@ -3,23 +3,24 @@
 from setuptools import setup
 import wdocker
 
+_description = 'Define docker commands in your Dockerfile'
+
 setup(
     name='wdocker',
     version=wdocker.__version__,
-    description='Define docker commands in your Dockerfile',
+    description=_description,
     author=wdocker.__author__,
     author_email='benjamin@babab.nl',
     url='http://github.com/babab/wdocker',
     download_url='https://pypi.python.org/pypi/wdocker',
     py_modules=['wdocker'],
     license='ISC',
-    long_description=open('README.rst').read(),
+    long_description=open('README.rst').read().replace(_description, ''),
     platforms='any',
     scripts=['script/wdocker'],
     classifiers=[
-        # 'BLOCK FOR UPLOAD',
-        'Development Status :: 3 - Alpha',
-        # 'Development Status :: 4 - Beta',
+        'BLOCK FOR UPLOAD',
+        'Development Status :: 4 - Beta',
         # 'Development Status :: 5 - Production/Stable',
         'Environment :: Console',
         'Intended Audience :: Developers',
