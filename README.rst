@@ -6,6 +6,21 @@ Define docker commands in your Dockerfile
 .. image:: https://travis-ci.org/babab/wdocker.svg?branch=master
    :target: https://travis-ci.org/babab/wdocker
 
+.. image:: https://gemnasium.com/babab/wdocker.svg
+   :target: https://gemnasium.com/babab/wdocker
+
+.. image:: https://img.shields.io/pypi/v/wdocker.svg
+   :target: https://pypi.python.org/pypi/wdocker/
+
+.. image:: https://img.shields.io/pypi/dm/wdocker.svg
+   :target: https://pypi.python.org/pypi/wdocker/
+
+.. image:: https://img.shields.io/pypi/l/wdocker.svg
+   :target: https://pypi.python.org/pypi/wdocker/
+
+
+Github_ | BitBucket_ | PyPI_ | Travis-CI_
+
 wdocker is a simple little solution to manage your docker image(s)
 and container(s) without having to remember and type long lists of
 optional arguments to docker commands. There are far more sophisticated
@@ -19,18 +34,12 @@ Reasons for using this docker wrapper called wdocker may be:
 - it does not make any assumptions about your docker environment
 - it is very flexible and scriptable
 
-.. _Decking: http://decking.io/
-.. _Docker compose: https://docs.docker.com/compose/
-
 
 Dependencies
 ------------
 
 - Python_ 2.7 or 3.2 and higher
 - Docker_
-
-.. _Python: https://www.python.org/
-.. _Docker: https://www.docker.com/
 
 
 Installing
@@ -174,6 +183,33 @@ And the full message with wdocker -help looks like this:
 This means you can proceed to execute either ``wdocker build``,
 ``wdocker run`` or ``wdocker up``.
 
+
+Running tests
+-------------
+
+Testing is done with nose. To install nose and run tests in a Python
+virtualenv for example, do the following (pyvenv is available since
+Python 3.3):
+
+.. code-block:: shell
+
+   pyvenv .virtualenv
+   source .virtualenv/bin/activate
+   pip install -r requirements-dev.txt
+   nosetests -v
+
+Tests are run automatically for each commit and/or pull request by
+Travis-CI_.
+
+
+.. _Github: https://github.com/babab/wdocker
+.. _Bitbucket: https://bitbucket.org/babab/wdocker
+.. _PyPI: https://pypi.python.org/pypi/wdocker
+.. _Travis-CI: https://travis-ci.org/babab/wdocker
+.. _Decking: http://decking.io/
+.. _Docker compose: https://docs.docker.com/compose/
+.. _Python: https://www.python.org/
+.. _Docker: https://www.docker.com/
 
 License
 -------
