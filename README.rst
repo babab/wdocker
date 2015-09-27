@@ -51,14 +51,16 @@ Installing (from the Python Package Index):
 
    sudo pip install wdocker
 
-Installing (development version):
+Installing (development version in a virtualenv):
 
 .. code-block:: shell
 
    git clone git://github.com/babab/wdocker.git
    cd wdocker
-   python setup.py bdist_wheel
-   pip install --upgrade dist/wdocker-0.2.0-py2.py3-none-any.whl
+   git checkout -b develop origin/develop
+   pyvenv .virtualenv
+   source .virtualenv/bin/activate
+   make install
 
 Un-installing:
 

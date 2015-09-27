@@ -12,8 +12,8 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-.PHONY: make install install-wheel install-dev install-src uninstall dist \
-	clean cleanup
+.PHONY: make install install-wheel install-dev install-src uninstall \
+	depends dist clean cleanup
 
 make:
 	@echo 'make install        alias for install-wheel'
@@ -38,7 +38,9 @@ install-dev: cleanup
 	make clean
 uninstall:
 	pip uninstall wdocker
-dist: cleanup
+depends:
+	pip install -r requirements-dev.txt
+dist: cleanup depends
 	python setup.py sdist bdist_wheel check
 clean:
 	rm -rf __pycache__ build
