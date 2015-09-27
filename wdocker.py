@@ -73,10 +73,6 @@ class WDocker:
         self.args = args
 
     def run(self):
-        if not self.parser.file_exists:
-            self._usage('no Dockerfile found in current directory')
-            return 1
-
         # show usage when wdocker is run without arguments
         if not self.args:
             self._usage()
@@ -86,6 +82,10 @@ class WDocker:
         if self.args[0] in ('-h', '-help', '--help'):
             self._usage(help=True)
             return 0
+
+        if not self.parser.file_exists:
+            self._usage('no Dockerfile found in current directory')
+            return 1
 
         # handle -print-var
         if self.args[0].startswith('-print-var'):
