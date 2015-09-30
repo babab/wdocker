@@ -11,10 +11,11 @@ adheres to `Semantic Versioning <http://semver.org/>`_.
 Added
 #####
 - This CHANGELOG
+- Internal command ``-version`` for displaying version information
 
 Fixed
 #####
-- Fix internal commands not displaying with -help when there is no Dockerfile
+- Internal commands not displaying with -help when there is no Dockerfile
 
 
 0.1.0 - 2015-09-26

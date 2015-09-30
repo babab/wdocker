@@ -78,15 +78,22 @@ class WDocker:
             self._usage()
             return 0
 
+        # Internal commands that do not need a Dockerfile ####################
         # handle -h, -help, --help, -?
         if self.args[0] in ('-h', '-help', '--help'):
             self._usage(help=True)
+            return 0
+
+        # handle -version
+        if self.args[0] == '-version':
+            print('wdocker {}'.format(__version__))
             return 0
 
         if not self.parser.file_exists:
             self._usage('no Dockerfile found in current directory')
             return 1
 
+        # Internal commands that need a Dockerfile ###########################
         # handle -print-var
         if self.args[0].startswith('-print-var'):
             if len(self.args) > 1:
@@ -128,6 +135,7 @@ class WDocker:
         if help:
             print('\nInternal commands:')
             print('  -help, -h, --help      show full usage info and vars')
+            print('  -version               show version info')
             print('  -print-var <variable>  print value of <variable>')
             if self.parser.variables:
                 print('\nVariables:')
