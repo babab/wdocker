@@ -10,7 +10,7 @@
 #wd# shell: {docker} exec -it {name} bash
 #wd# start: {docker} start {name}
 #wd# stop: {docker} stop {name}
-#wd# attach: clear ;; {docker} attach {name}
+#wd# attach: clear && {docker} attach {name}
 
 FROM debian:latest
 CMD watch ps aux

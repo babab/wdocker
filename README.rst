@@ -83,11 +83,11 @@ Defining a variable:
    #wd# <var> = <value>
 
 
-Defining a command (;; can be used to run multiple commands):
+Defining a command (commands are very much like shell aliases):
 
 .. code-block:: shell
 
-   #wd# <command>: <command> [;; <command>] [;; ... ]
+   #wd# <command>: <shell command>
 
 
 Expanding a variable in another variable or command:
@@ -131,7 +131,7 @@ example:
 
    #wd# build: {build}
    #wd# run: {run}
-   #wd# up: {build} ;; {run}
+   #wd# up: {build} && {run}
 
    FROM debian:latest
    CMD watch ps aux
@@ -157,7 +157,7 @@ The usage message for the last Dockerfile example looks like this:
    Commands:
      build     docker build -t combined .
      run       docker run -it --name combined combined
-     up        docker build -t combined . ;; docker run -it --name combined combined
+     up        docker build -t combined . && docker run -it --name combined combined
 
 
 And the full message with wdocker -help looks like this:
@@ -168,6 +168,7 @@ And the full message with wdocker -help looks like this:
 
    Internal commands:
      -help, -h, --help      show full usage info and vars
+     -version               show version info
      -print-var <variable>  print value of <variable>
 
    Variables:
@@ -179,7 +180,7 @@ And the full message with wdocker -help looks like this:
    Commands:
      build     docker build -t combined .
      run       docker run -it --name combined combined
-     up        docker build -t combined . ;; docker run -it --name combined combined
+     up        docker build -t combined . && docker run -it --name combined combined
 
 
 This means you can proceed to execute either ``wdocker build``,

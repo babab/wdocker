@@ -9,7 +9,7 @@
 
 #wd# build: {build}
 #wd# run: {run}
-#wd# up: {build} ;; {run}
+#wd# up: {build} && {run}
 
 FROM debian:latest
 CMD watch ps aux

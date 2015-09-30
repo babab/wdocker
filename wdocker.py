@@ -14,7 +14,6 @@
 
 import collections
 import os
-import shlex
 import string
 import subprocess
 import sys
@@ -122,10 +121,9 @@ class WDocker:
         return 3
 
     def _call(self, arg):
-        commands = self.parser.commands[arg].split(';;')
-        for cmd in commands:
-            print(':: ' + cmd)
-            subprocess.call(shlex.split(cmd))
+        command = self.parser.commands[arg]
+        print(':: ' + command)
+        subprocess.call(command, shell=True)
         return 0
 
     def _usage(self, error='', help=False):
