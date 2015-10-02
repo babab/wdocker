@@ -49,18 +49,15 @@ Installing (from the Python Package Index):
 
 .. code-block:: shell
 
-   sudo pip install wdocker
+   sudo pip install --upgrade wdocker
 
-Installing (development version in a virtualenv):
+Installing (development version):
 
 .. code-block:: shell
 
    git clone git://github.com/babab/wdocker.git
    cd wdocker
-   git checkout -b develop origin/develop
-   pyvenv .virtualenv
-   source .virtualenv/bin/activate
-   make install
+   sudo make install
 
 Un-installing:
 
@@ -203,6 +200,13 @@ Python 3.3):
 
 Tests are run automatically for each commit and/or pull request by
 Travis-CI_.
+
+
+Bugs, Issues and Enhancements
+-----------------------------
+
+Feel free to use the issues, forking and/or pull requests mechanisms of
+Github_ or Bitbucket_ to submit bugs, ideas or enhancements.
 
 
 .. _Github: https://github.com/babab/wdocker
