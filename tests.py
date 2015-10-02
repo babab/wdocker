@@ -12,7 +12,7 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
-from nose.tools import eq_
+from nose.tools import eq_, raises
 from collections import OrderedDict
 
 import wdocker
@@ -24,12 +24,14 @@ def test_parser_noinit():
     eq_(parser.file_exists, None)
 
 
+@raises(wdocker.ParserError)
 def test_parser_init():
     '''Parser: file_exists is False when initialized (in main dir)'''
     parser = wdocker.Parser()
     eq_(parser.file_exists, False)
 
 
+@raises(wdocker.ParserError)
 def test_parser_collections():
     '''Parser: variables and commands(_raw) are of type OrderedDict'''
     parser = wdocker.Parser()
@@ -38,6 +40,7 @@ def test_parser_collections():
     eq_(parser.commands_raw, OrderedDict())
 
 
+@raises(wdocker.ParserError)
 def test_parser_parse_var():
     '''Parser: parsing a variable'''
     parser = wdocker.Parser()
@@ -45,6 +48,7 @@ def test_parser_parse_var():
     eq_(parser.variables, OrderedDict([('testvar', 'testvalue')]))
 
 
+@raises(wdocker.ParserError)
 def test_parser_parse_multiple_vars():
     '''Parser: parsing multiple variables'''
     parser = wdocker.Parser()
@@ -57,6 +61,7 @@ def test_parser_parse_multiple_vars():
         ]))
 
 
+@raises(wdocker.ParserError)
 def test_parser_parse_command():
     '''Parser: parsing a command'''
     parser = wdocker.Parser()
@@ -65,6 +70,7 @@ def test_parser_parse_command():
     eq_(parser.commands, OrderedDict())
 
 
+@raises(wdocker.ParserError)
 def test_parser_expanding_variables_in_variable():
     '''Parser: expanding variables in a variable'''
     parser = wdocker.Parser()
@@ -75,6 +81,7 @@ def test_parser_expanding_variables_in_variable():
     eq_(parser.variables, OrderedDict([('foo', 'bar'), ('bar', 'bar')]))
 
 
+@raises(wdocker.ParserError)
 def test_parser_expanding_variables_in_command():
     '''Parser: expanding variables in a command'''
     parser = wdocker.Parser()
