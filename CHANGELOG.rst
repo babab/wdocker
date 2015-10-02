@@ -5,14 +5,14 @@ All notable changes to wdocker will be documented here. The project
 adheres to `Semantic Versioning <http://semver.org/>`_.
 
 
-0.2.0 - to be released
-----------------------
+0.2.0 - 2015-10-02
+------------------
 
 Added
 #####
 - This CHANGELOG
 - Internal command ``-version`` for displaying version information
-- Support for full shell commands like ``docker {} exec ip addr | grep 172``
+- Support for full shell commands like ``docker foo exec ip addr | grep 172``
 
 Fixed
 #####
