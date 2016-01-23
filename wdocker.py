@@ -1,4 +1,4 @@
-# Copyright (c) 2015  Benjamin Althues <benjamin@babab.nl>
+# Copyright (c) 2015-2016 Benjamin Althues <benjamin@althu.es>
 #
 # Permission to use, copy, modify, and distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -20,7 +20,7 @@ import sys
 
 __docformat__ = 'restructuredtext'
 __author__ = "Benjamin Althues"
-__copyright__ = "Copyright (C) 2015  Benjamin Althues"
+__copyright__ = "Copyright (C) 2015-2016  Benjamin Althues"
 __version_info__ = (0, 2, 0, 'beta', 0)
 __version__ = '0.2.0'
 

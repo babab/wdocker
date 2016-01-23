@@ -10,7 +10,7 @@ setup(
     version=wdocker.__version__,
     description=_description,
     author=wdocker.__author__,
-    author_email='benjamin@babab.nl',
+    author_email='benjamin@althu.es',
     url='http://github.com/babab/wdocker',
     download_url='https://pypi.python.org/pypi/wdocker',
     py_modules=['wdocker'],
