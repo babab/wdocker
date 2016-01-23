@@ -158,9 +158,6 @@ class WDocker:
                     print('\nVariables:')
                     for k, v in self.parser.variables.items():
                         print('  {:9} = {}'.format(k, v))
-                    else:
-                        print('\nVariables: No variables defined in '
-                              'Dockerfile (yet)')
 
         if self.parser:
             if self.parser.commands:

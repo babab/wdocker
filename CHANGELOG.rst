@@ -4,6 +4,13 @@ Change Log
 All notable changes to wdocker will be documented here. The project
 adheres to `Semantic Versioning <http://semver.org/>`_.
 
+1.0.0 - to be released
+----------------------
+
+Fixed
+#####
+- Message "Variables: No variables defined in Dockerfile (yet)" is removed
+
 
 0.2.0 - 2015-10-02
 ------------------
