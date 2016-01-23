@@ -7,6 +7,10 @@ adheres to `Semantic Versioning <http://semver.org/>`_.
 1.0.0 - to be released
 ----------------------
 
+Added
+#####
+- Support for supplying "program arguments" that are appended to the command
+
 Fixed
 #####
 - Message "Variables: No variables defined in Dockerfile (yet)" is removed

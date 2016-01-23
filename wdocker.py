@@ -138,7 +138,8 @@ class WDocker:
         return 3
 
     def _call(self, arg):
-        command = self.parser.commands[arg]
+        command = '{} {}'.format(self.parser.commands[arg],
+                                 ' '.join(self.args[1:])).strip()
         print(':: ' + command)
         subprocess.call(command, shell=True)
         return 0
@@ -146,7 +147,7 @@ class WDocker:
     def _usage(self, error='', help=False):
         if error:
             print('Error: {}\n'.format(error))
-        print('Usage: wdocker [<command> | -help]')
+        print('Usage: wdocker [<command> | -help] [<program arguments> ...]')
         if help:
             print('\nInternal commands:')
             print('  -help, -h, --help      show full usage info and vars')

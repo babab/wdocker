@@ -161,7 +161,7 @@ And the full message with wdocker -help looks like this:
 
 .. code-block:: console
 
-   Usage: wdocker [<command> | -help]
+   Usage: wdocker [<command> | -help] [<program arguments> ...]
 
    Internal commands:
      -help, -h, --help      show full usage info and vars
