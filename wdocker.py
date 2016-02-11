@@ -155,14 +155,14 @@ class WDocker:
             print('  -version               show version info')
             print('  -print-var <variable>  print value of <variable>')
 
-            varlen = max(len(k) for k, _ in self.parser.variables.items())
+            varlen = max(len(i) for i in self.parser.variables.keys())
             if self.parser:
                 if self.parser.variables:
                     print('\nVariables:')
                     for k, v in self.parser.variables.items():
                         print('  {:{div}} = {}'.format(k, v, div=varlen))
 
-        commandlen = max(len(k) for k, _ in self.parser.commands.items())
+        commandlen = max(len(i) for i in self.parser.commands.keys())
         if self.parser:
             if self.parser.commands:
                 print('\nCommands:')
