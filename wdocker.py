@@ -148,23 +148,26 @@ class WDocker:
         if error:
             print('Error: {}\n'.format(error))
         print('Usage: wdocker [<command> | -help] [<program arguments> ...]')
+
         if help:
             print('\nInternal commands:')
             print('  -help, -h, --help      show full usage info and vars')
             print('  -version               show version info')
             print('  -print-var <variable>  print value of <variable>')
 
+            varlen = max(len(k) for k, _ in self.parser.variables.items())
             if self.parser:
                 if self.parser.variables:
                     print('\nVariables:')
                     for k, v in self.parser.variables.items():
-                        print('  {:9} = {}'.format(k, v))
+                        print('  {:{div}} = {}'.format(k, v, div=varlen))
 
+        commandlen = max(len(k) for k, _ in self.parser.commands.items())
         if self.parser:
             if self.parser.commands:
                 print('\nCommands:')
                 for k, v in self.parser.commands.items():
-                    print('  {:10}{}'.format(k, v))
+                    print('  {:{div}} {}'.format(k, v, div=commandlen))
             else:
                 print('\nCommands: No commands defined in Dockerfile (yet)')
 
