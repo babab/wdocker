@@ -68,7 +68,7 @@ Un-installing:
 
 .. code-block:: shell
 
-   pip uninstall wdocker
+   sudo pip uninstall wdocker
 
 
 Installing on Archlinux
