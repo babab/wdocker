@@ -107,10 +107,14 @@ class WDocker:
 
     def run(self):
         # Internal commands that do not need a Dockerfile ####################
-        # handle -h, -help, --help, -?
-        if self.args and self.args[0] in ('-h', '-help', '--help'):
-            self._usage(help=True)
-            return 0
+        # handle -h, -help, --help, -? and handle -version
+        if self.args:
+            if self.args[0] in ('-h', '-help', '--help'):
+                self._usage(help=True)
+                return 0
+            elif self.args[0] == '-version':
+                print('wdocker {}'.format(__version__))
+                return 0
 
         # show parser errors if there are any and exit with exit code 2
         if self.error:
@@ -122,12 +126,7 @@ class WDocker:
             self._usage()
             return 0
 
-        # handle -version
-        if self.args[0] == '-version':
-            print('wdocker {}'.format(__version__))
-            return 0
-
-        # Internal commands that do not need a Dockerfile ####################
+        # Internal commands that do need a Dockerfile ########################
         # handle -print-var
         if self.args[0].startswith('-print-var'):
             if len(self.args) > 1:
