@@ -21,18 +21,22 @@ Define docker commands in your Dockerfile
 
 Github_ | BitBucket_ | PyPI_ | Travis-CI_
 
-wdocker is a simple little solution to manage your docker image(s)
-and container(s) without having to remember and type long lists of
-optional arguments to docker commands. There are far more sophisticated
-soultions for managing Docker container environments like Decking_ or
-`Docker compose`_ and I advise to use them for setting up environments
-of multiple containers.
+wdocker is a simple little solution to manage your docker image(s) and
+container(s) without having to remember and type long lists of optional
+arguments to docker commands. It gives you shell aliases that are (only)
+available in the environment where your Dockerfile is.
+
+There are far more sophisticated soultions for managing Docker container
+environments like Decking_ or `Docker compose`_ and I advise to use them
+for setting up environments of multiple containers.
 
 Reasons for using this docker wrapper called wdocker may be:
 
+- to create aliases for those long docker commands and argument lists
 - it does not need an (extra) configfile
 - it does not make any assumptions about your docker environment
 - it is very flexible and scriptable
+- to create shortcuts for all sorts of other tasks (not related to Docker)
 
 
 Dependencies
@@ -40,6 +44,7 @@ Dependencies
 
 - Python_ 2.7 or 3.2 and higher
 - Docker_
+- ansicolors_ (optional, only used when installed)
 
 
 Installing
@@ -64,6 +69,18 @@ Un-installing:
 .. code-block:: shell
 
    pip uninstall wdocker
+
+
+Installing on Archlinux
+-----------------------
+
+For Archlinux there are `AUR packages available`_ (created by Tom Willemse)
+
+.. code-block:: shell
+
+   cower -d python-wdocker # release version
+   # or
+   cower -d python-wdocker-git # development version
 
 
 Writing commands in your Dockerfile
@@ -217,6 +234,8 @@ Github_ or Bitbucket_ to submit bugs, ideas or enhancements.
 .. _Docker compose: https://docs.docker.com/compose/
 .. _Python: https://www.python.org/
 .. _Docker: https://www.docker.com/
+.. _ansicolors: https://pypi.python.org/pypi/ansicolors
+.. _AUR packages available: https://aur.archlinux.org/packages/?K=python-wdocker
 
 License
 -------
