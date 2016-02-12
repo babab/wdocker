@@ -173,8 +173,8 @@ class WDocker:
             print('  -version               show version info')
             print('  -print-var <variable>  print value of <variable>')
 
-            varlen = max(len(i) for i in self.parser.variables.keys())
             if self.parser:
+                varlen = max(len(i) for i in self.parser.variables.keys())
                 if self.parser.variables:
                     print('\nVariables:')
                     for k, v in self.parser.variables.items():
@@ -182,8 +182,8 @@ class WDocker:
                             paddedColoredOutput(k, varlen, True), v
                         ))
 
-        commandlen = max(len(i) for i in self.parser.commands.keys())
         if self.parser:
+            commandlen = max(len(i) for i in self.parser.commands.keys())
             if self.parser.commands:
                 print('\nCommands:')
                 for k, v in self.parser.commands.items():
