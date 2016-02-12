@@ -12,6 +12,8 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+ZSH_SITE_FUNCS_PATH	= /usr/share/zsh/site-functions
+
 .PHONY: make install install-wheel install-dev install-src uninstall \
 	depends dist clean cleanup
 
@@ -29,12 +31,15 @@ install: install-wheel
 
 install-wheel: dist
 	pip install --upgrade dist/wdocker-0.2.0-py2.py3-none-any.whl
+	cp zsh/_wdocker $(ZSH_SITE_FUNCS_PATH)
 	make clean
 install-src: dist
 	pip install --upgrade dist/wdocker-0.2.0.tar.gz
+	cp zsh/_wdocker $(ZSH_SITE_FUNCS_PATH)
 	make clean
 install-dev: cleanup
 	pip install --upgrade -e .
+	cp zsh/_wdocker $(ZSH_SITE_FUNCS_PATH)
 	make clean
 uninstall:
 	pip uninstall wdocker
