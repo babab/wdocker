@@ -18,6 +18,15 @@ import string
 import subprocess
 import sys
 
+try:
+    from colors import green, magenta
+except ImportError:
+    def green(x):
+        return x
+
+    def magenta(x):
+        return x
+
 __docformat__ = 'restructuredtext'
 __author__ = "Benjamin Althues"
 __copyright__ = "Copyright (C) 2015-2016  Benjamin Althues"
@@ -25,6 +34,15 @@ __version_info__ = (0, 2, 0, 'beta', 0)
 __version__ = '0.2.0'
 
 DOCKERFILE = 'Dockerfile'
+
+
+def paddedColoredOutput(string, maxlen, color2=False):
+    div = maxlen - len(string)
+    if sys.stdout.isatty():
+        if color2:
+            return '{}{}'.format(magenta(string), ' ' * div)
+        return '{}{}'.format(green(string), ' ' * div)
+    return '{}{}'.format(string, ' ' * div)
 
 
 class ParserError(Exception):
@@ -160,14 +178,18 @@ class WDocker:
                 if self.parser.variables:
                     print('\nVariables:')
                     for k, v in self.parser.variables.items():
-                        print('  {:{div}} = {}'.format(k, v, div=varlen))
+                        print('  {} = {}'.format(
+                            paddedColoredOutput(k, varlen, True), v
+                        ))
 
         commandlen = max(len(i) for i in self.parser.commands.keys())
         if self.parser:
             if self.parser.commands:
                 print('\nCommands:')
                 for k, v in self.parser.commands.items():
-                    print('  {:{div}} {}'.format(k, v, div=commandlen))
+                    print('  {}  {}'.format(
+                        paddedColoredOutput(k, commandlen), v
+                    ))
             else:
                 print('\nCommands: No commands defined in Dockerfile (yet)')
 
