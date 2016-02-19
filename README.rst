@@ -38,23 +38,11 @@ Reasons for using this docker wrapper called wdocker may be:
 
 wdocker has several homes on the Internet:
 
-Main website (docs coming soon)
-   https://github.com/babab/wdocker
-
-In the Python Package Index (PyPI)
-   http://pypi.python.org/pypi/wdocker/
-
-Github repository and Issue tracker
-   https://github.com/babab/wdocker
-
-Bitbucket repository
-   https://bitbucket.org/babab/wdocker
-
-Automatic testing with Travis CI
-   https://travis-ci.org/babab/wdocker
-
-Project Management with Waffle.io
-   https://waffle.io/babab/wdocker
+- `Python Package Index (PyPI) project page <http://pypi.python.org/pypi/wdocker/>`_
+- `Github repository and Issue tracker <https://github.com/babab/wdocker>`_
+- `Bitbucket repository <https://bitbucket.org/babab/wdocker>`_
+- `Automatic testing with Travis CI <https://travis-ci.org/babab/wdocker>`_
+- `Project Management with Waffle.io <https://waffle.io/babab/wdocker>`_
 
 
 Dependencies
