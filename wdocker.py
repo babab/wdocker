@@ -34,9 +34,16 @@ __version_info__ = (0, 2, 0, 'beta', 0)
 __version__ = '0.2.0'
 
 DOCKERFILE = 'Dockerfile'
+'''The name of the file that must be parsed'''
 
 
 def paddedColoredOutput(string, maxlen, color2=False):
+    '''Fill string with spaces up to maxlen characters
+
+    This is a workaround for setting padding using python str.format
+    e.g. ``{:{padding}}`` which does not work properly when outputting
+    ANSI colors
+    '''
     div = maxlen - len(string)
     if sys.stdout.isatty():
         if color2:
@@ -50,13 +57,30 @@ class ParserError(Exception):
 
 
 class Parser:
+    '''Parses Dockerfile and finds variables and commands'''
+
     file_exists = None
+    '''Boolean value, whether the Dockerfile was found on init'''
+
     variables = {}
+    '''OrderedDict of variables'''
+
     commands = {}
+    '''OrderedDict of commands (expanded with variables)'''
+
     commands_raw = {}
+    '''OrderedDict of raw commands'''
+
     lineno = 0
+    '''The line number, used for printing helpful error messages'''
 
     def __init__(self):
+        '''The only 'public' call
+
+        Sets up OrderedDict collections for variables and commands{raw}
+        and checks file location of `DOCKERFILE` and further completes
+        parsing by calling private methods.
+        '''
         self.file_exists = True
         self.variables = collections.OrderedDict()
         self.commands = collections.OrderedDict()
@@ -69,6 +93,10 @@ class Parser:
             self._parseFile(f)
 
     def _parseFile(self, fh):
+        '''Check each line in `fh` for wd comments and parse them
+
+        Call `_parseDirective` with the contents of the line when found
+        and expand variables immediately after.'''
         for line in fh:
             self.lineno += 1
             if line.startswith('#wd#'):
@@ -76,6 +104,9 @@ class Parser:
                 self._expandVariables()
 
     def _parseDirective(self, line):
+        '''Differentiate between variables/commands in `line`
+
+        Add the variable or command to the appropiate OrderedDict.'''
         new = line[4:].split()
         if new[0].endswith(':'):
             self.commands_raw[new[0][:-1]] = ' '.join(new[1:])
@@ -83,6 +114,7 @@ class Parser:
             self.variables[new[0]] = ' '.join(new[2:])
 
     def _expandVariables(self):
+        '''Loop through variables and commands_raw and expand variables'''
         fmt = string.Formatter()
         for var, value in self.variables.items():
             self.variables[var] = fmt.vformat(value, [], self.variables)
@@ -96,7 +128,10 @@ class Parser:
 
 
 class WDocker:
+    '''Shell command argument handling'''
+
     def __init__(self, args=sys.argv[1:]):
+        '''Initialize `Parser` object and shell arguments'''
         self.args = args
         self.error = None
         try:
@@ -106,6 +141,7 @@ class WDocker:
             self.error = 'when parsing Dockerfile: {}'.format(error)
 
     def run(self):
+        '''Run the program'''
         # Internal commands that do not need a Dockerfile ####################
         # handle -h, -help, --help, -? and handle -version
         if self.args:
@@ -148,6 +184,7 @@ class WDocker:
         return 1
 
     def _printVar(self, arg):
+        '''Print variable `arg` if it can be found'''
         if arg in self.parser.variables.keys():
             print(self.parser.variables[arg])
             return 0
@@ -155,6 +192,7 @@ class WDocker:
         return 3
 
     def _call(self, arg):
+        '''Run the defined wdocker `arg` command'''
         command = '{} {}'.format(self.parser.commands[arg],
                                  ' '.join(self.args[1:])).strip()
         print(':: ' + command)
@@ -162,6 +200,7 @@ class WDocker:
         return 0
 
     def _usage(self, error='', help=False):
+        '''Print usage information'''
         if error:
             print('Error: {}\n'.format(error))
         print('Usage: wdocker [<command> | -help] [<program arguments> ...]')
