@@ -12,35 +12,37 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+VERSION			= 0.2.0
 ZSH_SITE_FUNCS_PATH	= /usr/share/zsh/site-functions
 
-.PHONY: make install install-wheel install-dev install-src uninstall \
-	depends dist clean cleanup
+.PHONY: make install install-wheel install-dev install-src install-zsh \
+	uninstall depends dist clean cleanup
 
 make:
 	@echo 'make install        alias for install-wheel'
 	@echo 'make install-wheel  install wdocker via wheel (default)'
 	@echo 'make install-src    install via source package'
 	@echo 'make install-dev    install via egg-link (for development)'
+	@echo 'make install-zsh    only install shell completion for Zsh'
 	@echo 'make uninstall      uninstall wdocker'
+	@echo ''
 	@echo 'make dist           make distributions'
 	@echo 'make clean          remove cache, and build files'
 	@echo 'make cleanup        remove cache, build, egg and dist files'
 
 install: install-wheel
 
-install-wheel: dist
-	pip install --upgrade dist/wdocker-0.2.0-py2.py3-none-any.whl
-	cp zsh/_wdocker $(ZSH_SITE_FUNCS_PATH)
+install-wheel: dist install-zsh
+	pip install --upgrade dist/wdocker-$(VERSION)-py2.py3-none-any.whl
 	make clean
-install-src: dist
-	pip install --upgrade dist/wdocker-0.2.0.tar.gz
-	cp zsh/_wdocker $(ZSH_SITE_FUNCS_PATH)
+install-src: dist install-zsh
+	pip install --upgrade dist/wdocker-$(VERSION).tar.gz
 	make clean
-install-dev: cleanup
+install-dev: cleanup install-zsh
 	pip install --upgrade -e .
-	cp zsh/_wdocker $(ZSH_SITE_FUNCS_PATH)
 	make clean
+install-zsh:
+	install -Dm 644 zsh/_wdocker $(ZSH_SITE_FUNCS_PATH)
 uninstall:
 	pip uninstall wdocker
 depends:
