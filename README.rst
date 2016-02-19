@@ -19,8 +19,6 @@ Define docker commands in your Dockerfile
    :target: https://pypi.python.org/pypi/wdocker/
 
 
-Github_ | BitBucket_ | PyPI_ | Travis-CI_
-
 wdocker is a simple little solution to manage your docker image(s) and
 container(s) without having to remember and type long lists of optional
 arguments to docker commands. It gives you shell aliases that are (only)
@@ -38,11 +36,31 @@ Reasons for using this docker wrapper called wdocker may be:
 - it is very flexible and scriptable
 - to create shortcuts for all sorts of other tasks (not related to Docker)
 
+wdocker has several homes on the Internet:
+
+Main website (docs coming soon)
+   https://github.com/babab/wdocker
+
+In the Python Package Index (PyPI)
+   http://pypi.python.org/pypi/wdocker/
+
+Github repository and Issue tracker
+   https://github.com/babab/wdocker
+
+Bitbucket repository
+   https://bitbucket.org/babab/wdocker
+
+Automatic testing with Travis CI
+   https://travis-ci.org/babab/wdocker
+
+Project Management with Waffle.io
+   https://waffle.io/babab/wdocker
+
 
 Dependencies
 ------------
 
-- Python_ 2.7 or 3.2 and higher
+- Python_ 2.7, 3.2, 3.3, 3.4 or 3.5
 - Docker_
 - ansicolors_ (optional, only used when installed)
 
