@@ -57,7 +57,13 @@ class ParserError(Exception):
 
 
 class Parser:
-    '''Parses Dockerfile and finds variables and commands'''
+    '''Parses Dockerfile and finds variables and commands
+
+    __init__ is the only 'public' call. It sets up OrderedDict
+    collections for variables and commands{raw} and checks file location
+    of `DOCKERFILE` and further completes parsing by calling private
+    methods.
+    '''
 
     file_exists = None
     '''Boolean value, whether the Dockerfile was found on init'''
@@ -75,12 +81,7 @@ class Parser:
     '''The line number, used for printing helpful error messages'''
 
     def __init__(self):
-        '''The only 'public' call
-
-        Sets up OrderedDict collections for variables and commands{raw}
-        and checks file location of `DOCKERFILE` and further completes
-        parsing by calling private methods.
-        '''
+        '''Main handler'''
         self.file_exists = True
         self.variables = collections.OrderedDict()
         self.commands = collections.OrderedDict()
