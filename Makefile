@@ -12,44 +12,36 @@
 # ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
 # OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+DESTDIR			= /
+PIP			= pip
+PYTHON			= python
 VERSION			= 0.2.0
-ZSH_SITE_FUNCS_PATH	= /usr/share/zsh/site-functions
+ZSH_SITE_FUNCS_PATH	= $(DESTDIR)/usr/share/zsh/site-functions
 
-.PHONY: make install install-wheel install-dev install-src install-zsh \
-	uninstall depends dist clean cleanup
+.PHONY: make install install-pip install-src install-zsh dist clean
 
 make:
-	@echo 'make install        alias for install-wheel'
-	@echo 'make install-wheel  install wdocker via wheel (default)'
-	@echo 'make install-src    install via source package'
-	@echo 'make install-dev    install via egg-link (for development)'
+	@echo 'make install        alias for install-pip'
+	@echo 'make install-pip    install wdocker wheel pkg with pip (default)'
+	@echo 'make install-src    install via setup.py install --root=$$DESTDIR'
+	@echo ''
 	@echo 'make install-zsh    only install shell completion for Zsh'
-	@echo 'make uninstall      uninstall wdocker'
 	@echo ''
 	@echo 'make dist           make distributions'
-	@echo 'make clean          remove cache, and build files'
-	@echo 'make cleanup        remove cache, build, egg and dist files'
+	@echo 'make clean          remove cache, build, egg and dist files'
 
-install: install-wheel
+install: install-pip
 
-install-wheel: dist install-zsh
-	pip install --upgrade dist/wdocker-$(VERSION)-py2.py3-none-any.whl
-	make clean
-install-src: dist install-zsh
-	pip install --upgrade dist/wdocker-$(VERSION).tar.gz
-	make clean
-install-dev: cleanup install-zsh
-	pip install --upgrade -e .
-	make clean
+install-pip: dist install-zsh
+	$(PIP) install --upgrade dist/wdocker-$(VERSION)-py2.py3-none-any.whl
+install-src: install-zsh
+	$(PYTHON) setup.py install --root='$(DESTDIR)'
+
 install-zsh:
-	install -Dm 644 zsh/_wdocker $(ZSH_SITE_FUNCS_PATH)
-uninstall:
-	pip uninstall wdocker
-depends:
-	pip install -r requirements-dev.txt
-dist: cleanup depends
-	python setup.py sdist bdist_wheel check
+	install -Dm 644 zsh/_wdocker "$(ZSH_SITE_FUNCS_PATH)/_wdocker"
+
+dist:
+	$(PIP) install -r requirements-dev.txt
+	$(PYTHON) setup.py sdist bdist_wheel check
 clean:
-	rm -rf __pycache__ build
-cleanup: clean
-	rm -rf dist wdocker.egg-info
+	rm -rf __pycache__ build dist wdocker.egg-info
