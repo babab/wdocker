@@ -80,18 +80,40 @@ class Parser:
     lineno = 0
     '''The line number, used for printing helpful error messages'''
 
+    path = None
+    '''The path where the Dockerfile is found'''
+
     def __init__(self):
         '''Main handler'''
-        self.file_exists = True
         self.variables = collections.OrderedDict()
         self.commands = collections.OrderedDict()
         self.commands_raw = collections.OrderedDict()
 
-        if not os.path.exists(DOCKERFILE):
-            self.file_exists = False
-            raise ParserError('{} does not exist'.format(DOCKERFILE))
-        with open(DOCKERFILE) as f:
+        dockerfile = self._findFile()
+        if not dockerfile:
+            raise ParserError(
+                '{} does not exist at current directory or any of its parents'
+                .format(DOCKERFILE)
+            )
+        with open(dockerfile) as f:
             self._parseFile(f)
+
+    def _findFile(self):
+        '''Find Dockerfile in curdir or any of its parent directories'''
+        if os.path.exists(DOCKERFILE):
+            return DOCKERFILE
+
+        curpath = os.curdir
+        lastpath = None
+        while True:
+            curpath = os.path.abspath(os.path.join(curpath, '..'))
+            dockerfile = os.path.join(curpath, 'Dockerfile')
+            if os.path.exists(dockerfile):
+                self.path = curpath
+                return dockerfile
+            if curpath == lastpath:
+                return False
+            lastpath = curpath
 
     def _parseFile(self, fh):
         '''Check each line in `fh` for wd comments and parse them
@@ -139,7 +161,7 @@ class WDocker:
             self.parser = Parser()
         except ParserError as error:
             self.parser = None
-            self.error = 'when parsing Dockerfile: {}'.format(error)
+            self.error = error
 
     def run(self):
         '''Run the program'''
@@ -193,11 +215,11 @@ class WDocker:
         return 3
 
     def _call(self, arg):
-        '''Run the defined wdocker `arg` command'''
+        '''Change to parser.path and run the defined wdocker `arg` command'''
         command = '{} {}'.format(self.parser.commands[arg],
                                  ' '.join(self.args[1:])).strip()
         print(':: ' + command)
-        subprocess.call(command, shell=True)
+        subprocess.call(command, shell=True, cwd=self.parser.path)
         return 0
 
     def _usage(self, error='', help=False):
