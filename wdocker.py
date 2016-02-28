@@ -33,9 +33,6 @@ __copyright__ = "Copyright (C) 2015-2016  Benjamin Althues"
 __version_info__ = (0, 2, 0, 'beta', 0)
 __version__ = '0.2.0'
 
-DOCKERFILE = 'Dockerfile'
-'''The name of the file that must be parsed'''
-
 
 def paddedColoredOutput(string, maxlen, color2=False):
     '''Fill string with spaces up to maxlen characters
@@ -59,14 +56,13 @@ class ParserError(Exception):
 class Parser:
     '''Parses Dockerfile and finds variables and commands
 
-    __init__ is the only 'public' call. It sets up OrderedDict
-    collections for variables and commands{raw} and checks file location
-    of `DOCKERFILE` and further completes parsing by calling private
+    parse() is the only 'public' method. It tries file locations for
+    `self.DOCKERFILE` and further completes parsing by calling private
     methods.
     '''
 
-    file_exists = None
-    '''Boolean value, whether the Dockerfile was found on init'''
+    DOCKERFILE = 'Dockerfile'
+    '''The name of the file that must be parsed'''
 
     variables = {}
     '''OrderedDict of variables'''
@@ -84,30 +80,33 @@ class Parser:
     '''The path where the Dockerfile is found'''
 
     def __init__(self):
-        '''Main handler'''
+        '''Prepare OrderedDict's for variables and commands'''
         self.variables = collections.OrderedDict()
         self.commands = collections.OrderedDict()
         self.commands_raw = collections.OrderedDict()
 
+    def parse(self):
+        '''Main handler, find and parse Dockerfile'''
         dockerfile = self._findFile()
         if not dockerfile:
             raise ParserError(
                 '{} does not exist at current directory or any of its parents'
-                .format(DOCKERFILE)
+                .format(self.DOCKERFILE)
             )
         with open(dockerfile) as f:
             self._parseFile(f)
+        return self
 
     def _findFile(self):
         '''Find Dockerfile in curdir or any of its parent directories'''
-        if os.path.exists(DOCKERFILE):
-            return DOCKERFILE
+        if os.path.exists(self.DOCKERFILE):
+            return self.DOCKERFILE
 
         curpath = os.curdir
         lastpath = None
         while True:
             curpath = os.path.abspath(os.path.join(curpath, '..'))
-            dockerfile = os.path.join(curpath, 'Dockerfile')
+            dockerfile = os.path.join(curpath, self.DOCKERFILE)
             if os.path.exists(dockerfile):
                 self.path = curpath
                 return dockerfile
@@ -158,7 +157,7 @@ class WDocker:
         self.args = args
         self.error = None
         try:
-            self.parser = Parser()
+            self.parser = Parser().parse()
         except ParserError as error:
             self.parser = None
             self.error = error
