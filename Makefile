@@ -21,12 +21,16 @@ ZSH_SITE_FUNCS_PATH	= $(DESTDIR)/usr/share/zsh/site-functions
 .PHONY: make install install-pip install-src install-zsh dist clean
 
 make:
+	@echo 'Installation targets'
 	@echo 'make install        alias for install-pip'
 	@echo 'make install-pip    install wdocker wheel pkg with pip (default)'
 	@echo 'make install-src    install via setup.py install --root=$$DESTDIR'
-	@echo ''
 	@echo 'make install-zsh    only install shell completion for Zsh'
-	@echo ''
+	@echo
+	@echo 'Note: make install-src does not install requirements.txt and '
+	@echo '      is aimed for usage in creating distribution packages'
+	@echo
+	@echo "Development targets"
 	@echo 'make dist           make distributions'
 	@echo 'make clean          remove cache, build, egg and dist files'
 
