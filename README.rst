@@ -25,7 +25,6 @@ Reasons for using this docker wrapper called wdocker may be:
 Resources
 ---------
 
-- Main website: http://pythonhosted.org/wdocker
 - Python Package Index: http://pypi.python.org/pypi/wdocker
 - Agile project management: https://waffle.io/babab/wdocker
 - Automatic testing: https://travis-ci.org/babab/wdocker
