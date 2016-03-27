@@ -1,10 +1,7 @@
 wdocker
 =======
 
-Define docker commands in your Dockerfile
-
-.. image:: https://travis-ci.org/babab/wdocker.svg?branch=master
-   :target: https://travis-ci.org/babab/wdocker
+**Define docker commands in your Dockerfile**
 
 wdocker is a simple little solution to manage your docker image(s) and
 container(s) without having to remember and type long lists of optional
@@ -32,8 +29,8 @@ Documentation index
 .. toctree::
    :maxdepth: 2
 
-   01-user-docs
-   02-api-docs
+   usage
+   api-reference
 
 Resources
 ---------
