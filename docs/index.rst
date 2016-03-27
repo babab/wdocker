@@ -6,19 +6,6 @@ Define docker commands in your Dockerfile
 .. image:: https://travis-ci.org/babab/wdocker.svg?branch=master
    :target: https://travis-ci.org/babab/wdocker
 
-.. image:: https://gemnasium.com/babab/wdocker.svg
-   :target: https://gemnasium.com/babab/wdocker
-
-.. image:: https://img.shields.io/pypi/v/wdocker.svg
-   :target: https://pypi.python.org/pypi/wdocker/
-
-.. image:: https://img.shields.io/pypi/dm/wdocker.svg
-   :target: https://pypi.python.org/pypi/wdocker/
-
-.. image:: https://img.shields.io/pypi/l/wdocker.svg
-   :target: https://pypi.python.org/pypi/wdocker/
-
-
 wdocker is a simple little solution to manage your docker image(s) and
 container(s) without having to remember and type long lists of optional
 arguments to docker commands. It gives you shell aliases that are (only)
@@ -51,8 +38,8 @@ Documentation index
 Resources
 ---------
 
-- Python Package Index (PyPI) `project page <http://pypi.python.org/pypi/wdocker/>`_
-- Code repositories at `Github <https://github.com/babab/wdocker>`_ and
-  `Bitbucket <https://bitbucket.org/babab/wdocker>`_
-- Project management with Github and `Waffle.io <https://waffle.io/babab/wdocker>`_
-- Automatic testing with `Travis CI <https://travis-ci.org/babab/wdocker>`_
+- Python Package Index: http://pypi.python.org/pypi/wdocker
+- Agile project management: https://waffle.io/babab/wdocker
+- Automatic testing: https://travis-ci.org/babab/wdocker
+- Github: https://github.com/babab/wdocker
+- Bitbucket: https://bitbucket.org/babab/wdocker
