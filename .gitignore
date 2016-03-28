@@ -2,5 +2,6 @@
 /build/
 /wdocker.egg-info/
 /dist/
+/doc/
 /docs/_build/
 /docs/.virtualenv/

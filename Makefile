@@ -18,7 +18,7 @@ PYTHON			= python
 VERSION			= 0.2.0
 ZSH_SITE_FUNCS_PATH	= $(DESTDIR)/usr/share/zsh/site-functions
 
-.PHONY: make install install-pip install-src install-zsh dist clean
+.PHONY: make install install-pip install-src install-zsh dist doc clean
 
 make:
 	@echo 'Installation targets'
@@ -32,6 +32,7 @@ make:
 	@echo
 	@echo "Development targets"
 	@echo 'make dist           make distributions'
+	@echo 'make doc            make documentation'
 	@echo 'make clean          remove cache, build, egg and dist files'
 
 install: install-pip
@@ -47,5 +48,12 @@ install-zsh:
 dist:
 	$(PIP) install -r requirements-dev.txt
 	$(PYTHON) setup.py sdist bdist_wheel check
+doc:
+	rm -rf doc/en/$(VERSION)
+	cd docs; make clean
+	cd docs; make html
+	mkdir -p doc/en
+	mv docs/_build/html doc/en/$(VERSION)
+
 clean:
-	rm -rf __pycache__ build dist wdocker.egg-info
+	rm -rf __pycache__ build dist doc wdocker.egg-info
